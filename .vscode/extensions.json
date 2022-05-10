@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "visualstudioexptteam.vscodeintellicode",
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker",
+    "wayou.vscode-todo-highlight",
+    "gruntfuggly.todo-tree",
+    "pavellev.trailing-spaces",
+    "vlanguage.vscode-vlang"
+  ]
+}
