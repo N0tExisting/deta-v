@@ -39,7 +39,9 @@ fn (deta &Deta) send_email(mail Mail) ?http.Response {
 	}
 
 	fetch.header.set(http.CommonHeader.content_type, 'application/json')
-	fetch.header.set_custom('X-Api-Key', deta.api_key) ?
+	fetch.header.set_custom('X-Api-Key', deta.api_key) or {
+		panic('Deta: Could not set X-Api-Key header')
+	}
 
 	return http.fetch(fetch)
 }
