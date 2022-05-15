@@ -10,8 +10,7 @@ pub:
 	name string [required]
 }
 
-
 [inline]
-fn (base Base) get_url () string {
-	return "https://database.deta.sh/v1/$base.deta.project_id/$base.name"
+fn (base Base) get_url() string {
+	return 'https://database.deta.sh/v1/$base.deta.project_id/$base.name'
 }

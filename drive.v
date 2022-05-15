@@ -14,6 +14,6 @@ pub:
 }
 
 [inline]
-fn (drive Drive) get_url () string {
+fn (drive Drive) get_url() string {
 	return "https://drive.deta.sh/v1/$drive.deta.project_id/$drive.name"
 }
