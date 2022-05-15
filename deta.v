@@ -9,15 +9,15 @@ pub:
 	project_id string
 }
 
-fn verify_name(name string) ? {
+fn verify_name(name string) ! {
 	if name.trim_space() == '' {
 		return error('Deta: name cannot be empty')
 	}
 }
 
 // base returns a new Base instance.
-pub fn (deta &Deta) base(name string) ?&Base {
-	verify_name(name) ?
+pub fn (deta &Deta) base(name string) !&Base {
+	verify_name(name) !
 
 	return &Base{
 		name: name
@@ -25,8 +25,8 @@ pub fn (deta &Deta) base(name string) ?&Base {
 	}
 }
 
-pub fn (deta &Deta) project(name string) ?&Drive {
-	verify_name(name) ?
+pub fn (deta &Deta) drive(name string) !&Drive {
+	verify_name(name) !
 
 	return &Drive{
 		name: name
@@ -41,9 +41,8 @@ mut:
 	id  string
 }
 
-// TODO: This doesn't work, as we can't have default arguments yet
-pub fn deta(mut cfg Deta_cfg) ?&Deta {
-	key, id := get_project_key_id(mut cfg) ?
+pub fn deta(mut cfg Deta_cfg) !&Deta {
+	key, id := get_project_key_id(mut cfg) !
 	return &Deta{
 		api_key: key
 		project_id: id
@@ -55,12 +54,10 @@ pub fn is_micro() bool {
 	return os.getenv('DETA_RUNTIME') == 'true'
 }
 
-// TODO: Implement https://github.com/deta/deta-python/blob/master/deta/utils.py
-fn get_project_key_id(mut cfg Deta_cfg) ?(string, string) {
+fn get_project_key_id(mut cfg Deta_cfg) !(string, string) {
 	if cfg.key.trim_space() == '' {
 		cfg.key = os.getenv('DETA_API_KEY')
 		if cfg.key.trim_space() == '' {
-			// TODO: Properly error
 			return error('Deta: no api key set')
 		}
 	}
