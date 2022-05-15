@@ -11,9 +11,10 @@ jobs:
 
       - name: Setup V
         uses: chelnak/setup-v@v0.1.0
-        #with:
-        #  # The V version to download and use.
-        #  v-version: # optional, default is lates
+        with:
+          # The V version to download and use.
+          #version: # optional, default is lates
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: v . -shared
