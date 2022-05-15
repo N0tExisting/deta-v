@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Setup V
-        uses: nocturlab/setup-vlang-action@v1.2.0
+        uses: chelnak/setup-v@v0.1.0
         #with:
         #  # The V version to download and use.
         #  v-version: # optional, default is lates
