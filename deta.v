@@ -2,7 +2,7 @@ module deta
 
 import os
 
-[heap; noinit]
+[heap /*; noinit */]
 pub struct Deta {
 	api_key string
 pub:
@@ -17,7 +17,7 @@ fn verify_name(name string) ! {
 
 // base returns a new Base instance.
 pub fn (deta &Deta) base(name string) !&Base {
-	verify_name(name) !
+	verify_name(name)!
 
 	return &Base{
 		name: name
@@ -26,7 +26,7 @@ pub fn (deta &Deta) base(name string) !&Base {
 }
 
 pub fn (deta &Deta) drive(name string) !&Drive {
-	verify_name(name) !
+	verify_name(name)!
 
 	return &Drive{
 		name: name
@@ -41,13 +41,15 @@ mut:
 	id  string
 }
 
-pub fn deta(mut cfg Deta_cfg) !&Deta {
+// HACK: This causes incorrect C code generation.
+
+/*pub fn deta(mut cfg Deta_cfg) !&Deta {
 	key, id := get_project_key_id(mut cfg) !
 	return &Deta{
 		api_key: key
 		project_id: id
 	}
-}
+}*/
 
 [inline]
 pub fn is_micro() bool {
@@ -65,9 +67,7 @@ fn get_project_key_id(mut cfg Deta_cfg) !(string, string) {
 	if cfg.id.trim_space() == '' {
 		mut id := cfg.key.split('_').first()
 		if id.trim_space() == '' {
-			id = os.getenv_opt('DETA_PROJECT_ID') or {
-				return error('Deta: no project id set')
-			}
+			id = os.getenv_opt('DETA_PROJECT_ID') or { return error('Deta: no project id set') }
 		}
 		cfg.id = id
 	}
