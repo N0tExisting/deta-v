@@ -2,7 +2,7 @@ module deta
 
 import os
 
-[heap /*; noinit */]
+[heap] /*; noinit */
 pub struct Deta {
 	api_key string
 pub:
